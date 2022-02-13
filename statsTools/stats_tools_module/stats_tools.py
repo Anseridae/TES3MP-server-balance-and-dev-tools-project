@@ -5,37 +5,24 @@ atLeastDistribution = []
 
 
 def exactDistributionCalc(chance, attempts):
-    iterator = 0
-    for _ in range(0, attempts + 1):
-        binomialCoefficient = (math.comb(attempts, iterator) *
-                               (chance ** iterator) * ((1 - chance) ** (attempts - iterator)))
-        distribution.append(binomialCoefficient)
-        iterator += 1
-    return distribution
+    """return a binomial distribution to use later"""
+    return [(math.comb(attempts, _) * (chance ** _) * ((1 - chance) ** (attempts - _))) for _ in range(attempts + 1)]
 
 
 def atLeastCalc():
-    iterator = 0
-    accumulator = 0
-    for i in distribution:
-        accumulator += i
-        atLeastDistribution.append(1 - accumulator)
-        iterator += 1
-    atLeastDistribution.pop()
-    return atLeastDistribution
+    """find the chance of at least x successes in the distribution"""
+    atLeastDistribution.clear()
+    for i in range(1, len(distribution)):
+        atLeastDistribution.append(1 - sum(distribution[0:i]))
 
 
 def printExact():
-    iterator = 0
-    for i in distribution:
-        print("your chance of exactly " + str(iterator) + " successes is "
-              + str(i * 100) + "%")
-        iterator += 1
+    """display the binomial distribution"""
+    return [f"your chance of exactly {idx} successes is {val * 100}%\n"
+            for idx, val in enumerate(distribution)]
 
 
 def printAtLeast():
-    iterator = 1
-    for i in atLeastDistribution:
-        print("your chance of at least " + str(iterator) + " successes is "
-              + str(i * 100) + "%")
-        iterator += 1
+    """display the chance of at least x successes in the distribution"""
+    return [f"your chance of at least {idx + 1} successes is {val * 100}%\n"
+            for idx, val in enumerate(atLeastDistribution)]
