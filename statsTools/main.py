@@ -1,24 +1,57 @@
+from tkinter import *
+from tkinter import ttk
 from stats_tools_module import stats_tools
 
 
 def main():
-    print("welcome to the stats tool thingy I made in about an hour of googling stuff :P\n"
-          "\n"
-          "first enter in the chance of success for one attempt in decimal\n"
-          "E.g. instead of doing 70% you do 0.7 or just .70 if that's how you prefer to write it\n"
-          "then enter in the number of attempts you want to simulate\n")
 
-    stats_tools.distribution = \
-        stats_tools.exactDistributionCalc(float(input("plz enter the chance for one success: ")),
-                                          int(input("plz enter the number of attempts you wanna simulate: ")))
-    print("\nhere is the binomial distribution")
-    stats_tools.printExact()
-    print("\n"
-          "here's another stats thingy")
-    stats_tools.atLeastCalc()
-    stats_tools.printAtLeast()
-    input("\n"
-          "press enter to exit")
+    def myClick():
+        try:
+            stats_tools.distribution = \
+                stats_tools.exactDistributionCalc(float(successChanceBox.get()), int(attemptBox.get()))
+            output1.config(text="\n".join(stats_tools.printExact()))
+            stats_tools.atLeastCalc()
+            output2.config(text="\n".join(stats_tools.printAtLeast()))
+        except ValueError:
+            output1.config(text="error")
+            output2.config(text="")
+
+    root = Tk()
+    root.title("binomial probability tool")
+
+    myLabel = Label(root, text="first enter in the chance of success for one attempt in decimal\n"
+                               "E.g. instead of doing 70% you do 0.7 or just .70 if that's how you prefer to write it\n"
+                               "then enter in the number of attempts you want to simulate\n")
+    myLabel.pack()
+
+    entryBar = ttk.Frame(root)
+    entryBar.pack()
+
+    entryLabel1 = Label(entryBar, text="enter chance for one success: ")
+    entryLabel1.grid(row=0, column=0)
+
+    successChanceBox = Entry(entryBar)
+    successChanceBox.grid(row=0, column=1)
+
+    entryLabel2 = Label(entryBar, text="enter number of attempts: ")
+    entryLabel2.grid(row=1, column=0)
+
+    attemptBox = Entry(entryBar)
+    attemptBox.grid(row=1, column=1)
+
+    calculateButton = Button(root, text="Calculate!", command=myClick)
+    calculateButton.pack()
+
+    outputGrid = ttk.Frame(root)
+    outputGrid.pack()
+
+    output1 = Label(outputGrid, text=" ", justify="left")
+    output1.grid(row=0, column=0)
+
+    output2 = Label(outputGrid, text=" ", justify="left")
+    output2.grid(row=1, column=0)
+
+    root.mainloop()
 
 
 if __name__ == '__main__':
