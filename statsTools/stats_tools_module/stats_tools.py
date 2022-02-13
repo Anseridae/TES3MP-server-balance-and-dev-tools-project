@@ -18,11 +18,11 @@ def atLeastCalc():
 
 def printExact():
     """display the binomial distribution"""
-    return [f"your chance of exactly {idx} successes is {val * 100}%\n"
+    return [f"your chance of exactly {idx} successes is {val * 100}%"
             for idx, val in enumerate(distribution)]
 
 
 def printAtLeast():
     """display the chance of at least x successes in the distribution"""
-    return [f"your chance of at least {idx + 1} successes is {val * 100}%\n"
+    return [f"your chance of at least {idx + 1} successes is {val * 100}%"
             for idx, val in enumerate(atLeastDistribution)]

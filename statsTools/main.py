@@ -9,11 +9,12 @@ def main():
         try:
             stats_tools.distribution = \
                 stats_tools.exactDistributionCalc(float(successChanceBox.get()), int(attemptBox.get()))
-            output1.config(text=stats_tools.printExact())
+            output1.config(text="\n".join(stats_tools.printExact()))
             stats_tools.atLeastCalc()
-            output2.config(text=stats_tools.printAtLeast())
+            output2.config(text="\n".join(stats_tools.printAtLeast()))
         except ValueError:
             output1.config(text="error")
+            output2.config(text="")
 
     root = Tk()
     root.title("binomial probability tool")
@@ -44,10 +45,10 @@ def main():
     outputGrid = ttk.Frame(root)
     outputGrid.pack()
 
-    output1 = Label(outputGrid, text=" ")
+    output1 = Label(outputGrid, text=" ", justify="left")
     output1.grid(row=0, column=0)
 
-    output2 = Label(outputGrid, text=" ")
+    output2 = Label(outputGrid, text=" ", justify="left")
     output2.grid(row=1, column=0)
 
     root.mainloop()
