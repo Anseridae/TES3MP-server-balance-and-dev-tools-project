@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from stats_tools_module import distribution_tool
 from stats_tools_module import fatigueTerm
+from stats_tools_module import hit_chance
 
 
 def main():
@@ -16,6 +17,9 @@ def main():
 
     button2 = Button(frame, padx=16, text="fatigueTerm tool", command=fatigueTerm.fatigueStat)
     button2.pack()
+
+    button3 = Button(frame, padx=38, text="hit chance", command=hit_chance.hitChanceStat)
+    button3.pack()
 
     root.mainloop()
 
