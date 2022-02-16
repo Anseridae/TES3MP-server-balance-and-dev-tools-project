@@ -10,6 +10,8 @@ you could even use it for something like simulating spell casting/hit chance/loc
 
 you can find the formulas for those things on the OpenMW research page
 
+https://gitlab.com/OpenMW/openmw/-/wikis/development/research
+
 ![image](https://user-images.githubusercontent.com/99191975/154197997-73701ca3-a426-4e2b-81b5-325100aa70e3.png)
 
 ## fatigue term tool
@@ -23,5 +25,5 @@ this tool lets calculates hit chances and it even lets you mess arround with GMS
 
 
 ## example use case
-if you plan on changing the GMSTs via a script you might wanna use these tools to see the changes
+if you plan on changing the GMSTs via a script or something you might wanna use these tools to see the changes
 ![image](https://user-images.githubusercontent.com/99191975/154199077-4bce48e2-32cb-490f-8b49-a2f60c1a62a3.png)
