@@ -1,55 +1,25 @@
 from tkinter import *
 from tkinter import ttk
-from stats_tools_module import stats_tools
+from stats_tools_module import distribution_tool
+from stats_tools_module import fatigueTerm
+from stats_tools_module import hit_chance
 
 
 def main():
-
-    def myClick():
-        try:
-            stats_tools.distribution = \
-                stats_tools.exactDistributionCalc(float(successChanceBox.get()), int(attemptBox.get()))
-            output1.config(text="\n".join(stats_tools.printExact()))
-            stats_tools.atLeastCalc()
-            output2.config(text="\n".join(stats_tools.printAtLeast()))
-        except ValueError:
-            output1.config(text="error")
-            output2.config(text="")
-
     root = Tk()
-    root.title("binomial probability tool")
+    root.title("tools menu")
 
-    myLabel = Label(root, text="first enter in the chance of success for one attempt in decimal\n"
-                               "E.g. instead of doing 70% you do 0.7 or just .70 if that's how you prefer to write it\n"
-                               "then enter in the number of attempts you want to simulate\n")
-    myLabel.pack()
+    frame = ttk.Frame(root)
+    frame.pack(padx=50)
 
-    entryBar = ttk.Frame(root)
-    entryBar.pack()
+    button1 = Button(frame, text="binomial distribution", command=distribution_tool.calculations)
+    button1.pack()
 
-    entryLabel1 = Label(entryBar, text="enter chance for one success: ")
-    entryLabel1.grid(row=0, column=0)
+    button2 = Button(frame, padx=16, text="fatigueTerm tool", command=fatigueTerm.fatigueStat)
+    button2.pack()
 
-    successChanceBox = Entry(entryBar)
-    successChanceBox.grid(row=0, column=1)
-
-    entryLabel2 = Label(entryBar, text="enter number of attempts: ")
-    entryLabel2.grid(row=1, column=0)
-
-    attemptBox = Entry(entryBar)
-    attemptBox.grid(row=1, column=1)
-
-    myButton = Button(root, text="Calculate!", command=myClick)
-    myButton.pack()
-
-    outputGrid = ttk.Frame(root)
-    outputGrid.pack()
-
-    output1 = Label(outputGrid, text=" ", justify="left")
-    output1.grid(row=0, column=0)
-
-    output2 = Label(outputGrid, text=" ", justify="left")
-    output2.grid(row=1, column=0)
+    button3 = Button(frame, padx=38, text="hit chance", command=hit_chance.hitChanceStat)
+    button3.pack()
 
     root.mainloop()
 
