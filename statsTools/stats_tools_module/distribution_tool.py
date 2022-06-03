@@ -5,35 +5,27 @@ import math
 
 class calculations:
     distribution = []
-    atLeastDistribution = []
+    atLeastDistribution = ()
 
-    @staticmethod
-    def exactDistributionCalc(chance, attempts):
-        """return a binomial distribution to use later"""
-        return [(math.comb(attempts, _) * (chance ** _) * ((1 - chance) ** (attempts - _)))
-                for _ in range(attempts + 1)]
+    def exactDistributionCalc(self, chance, attempts):
+        self.distribution = [(math.comb(attempts, _) * (chance ** _) * ((1 - chance) ** (attempts - _)))
+                             for _ in range(attempts + 1)]
 
     def atLeastCalc(self):
-        """find the chance of at least x successes in the distribution"""
-        self.atLeastDistribution.clear()
-        for i in range(1, len(self.distribution)):
-            self.atLeastDistribution.append(1 - sum(self.distribution[0:i]))
+        self.atLeastDistribution = ((1 - sum(self.distribution[:i])) for i in range(1, len(self.distribution)))
 
     def printExact(self):
-        """display the binomial distribution"""
-        return [f"your chance of exactly {idx} successes is {val * 100}%"
-                for idx, val in enumerate(self.distribution)]
+        return (f"your chance of exactly {idx} successes is {val:%}"
+                for idx, val in enumerate(self.distribution))
 
     def printAtLeast(self):
-        """display the chance of at least x successes in the distribution"""
-        return [f"your chance of at least {idx + 1} successes is {val * 100}%"
-                for idx, val in enumerate(self.atLeastDistribution)]
+        return (f"your chance of at least {idx + 1} successes is {val:%}"
+                for idx, val in enumerate(self.atLeastDistribution))
 
     def __init__(self):
         def myClick():
             try:
-                self.distribution = \
-                    self.exactDistributionCalc(float(successChanceBox.get()), int(attemptBox.get()))
+                self.exactDistributionCalc(float(successChanceBox.get()), int(attemptBox.get()))
                 output1.config(text="\n".join(self.printExact()))
                 self.atLeastCalc()
                 output2.config(text="\n".join(self.printAtLeast()))

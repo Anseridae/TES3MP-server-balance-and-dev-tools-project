@@ -6,10 +6,7 @@ class fatigueStat:
 
     @staticmethod
     def normalizedFatigueCalc(fFatigueBase, fFatigueMult, maxFatigue, currentFatigue):
-        if maxFatigue == 0:
-            normalizedFatigue = 1
-        else:
-            normalizedFatigue = max(0.0, currentFatigue / maxFatigue)
+        normalizedFatigue = 1 if maxFatigue == 0 else max(0.0, currentFatigue / maxFatigue)
         # it is possible for normalizedFatigue to go over 1.0 when fatigue is fortified, it is not capped from above.
         return fFatigueBase - fFatigueMult * (1 - normalizedFatigue)
         # where normalizedFatigue is a function of actor fatigue. empty fatigue bar -> 0.0, full fatigue bar -> 1.0
